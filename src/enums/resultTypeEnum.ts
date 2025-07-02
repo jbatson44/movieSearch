@@ -2,5 +2,6 @@ export enum ResultType {
   All = 'all',
   Movie = 'movie',
   Series = 'series',
-  Episode = 'episode'
+  Episode = 'episode',
+  Game = 'game'
 }
