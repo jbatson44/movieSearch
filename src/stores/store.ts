@@ -7,16 +7,19 @@ import { ResultType } from '@/enums/resultTypeEnum'
 export const useStore = defineStore('store', () => {
   let movieResult = ref(new MovieSearchResult([], "", ""));
 
-  function search(searchQuery: string, type: ResultType) {
-    let url = buildUrl(searchQuery, type);
+  function search(searchQuery: string, type: ResultType, year: string) {
+    let url = buildUrl(searchQuery, type, year);
     fetchData(url);
   }
 
-  function buildUrl(searchQuery: string, type: ResultType) {
+  function buildUrl(searchQuery: string, type: ResultType, year: string) {
     let apikey = "3f66eca5";
     let url = `https://www.omdbapi.com/?s=${searchQuery}&apikey=${apikey}`;
     if (type !== ResultType.All) {
       url += `&type=${type}`;
+    }
+    if (year) {
+      url += `&y=${year}`;
     }
     return url;
   }

@@ -3,11 +3,14 @@
     <div class="search-bar">
       <label for="search">Search movies/series by name: </label>
       <input id="search" type="text" v-model="searchString" @keyup.enter="submitSearch"/>
-      <select v-model="selectedResultType">
+      <label for="type-dropdown">Type: </label>
+      <select id="type-dropdown" v-model="selectedResultType">
         <option v-for="[label, value] in resultTypes" :key="value" :value="value">
           {{ label }}
         </option>
       </select>
+      <label for="year-input">Year: </label>
+      <input id="year-input" type="number" v-model.number="year" />
       <button :onclick="submitSearch">Search</button>
     </div>
   </div>
@@ -26,10 +29,11 @@ defineProps<{
 const resultTypes = Object.entries(ResultType);
 let searchString = ref("");
 let selectedResultType = ref<ResultType>(ResultType.All);
+let year = ref<number | null>(null)
 
 function submitSearch()
 {
-  store.search(searchString.value, selectedResultType.value);
+  store.search(searchString.value, selectedResultType.value, year.value?.toString() ?? "");
 }
 </script>
 
