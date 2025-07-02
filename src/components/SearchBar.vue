@@ -18,9 +18,10 @@
 </template>
 
 <script setup lang="ts">
-import {ref} from 'vue'
-import {useStore} from '../stores/store'
+import { ref } from 'vue'
+import { useStore } from '../stores/store'
 import { ResultType } from '@/enums/resultTypeEnum';
+import { SearchOptions } from '@/models/searchOptions';
 
 const store = useStore();
 defineProps<{
@@ -33,7 +34,9 @@ let year = ref<number | null>(null)
 
 function submitSearch()
 {
-  store.search(searchString.value, selectedResultType.value, year.value?.toString() ?? "");
+  // always the first page here
+  store.searchOptions = new SearchOptions(searchString.value, selectedResultType.value, year.value?.toString() ?? "", "1")
+  store.search();
 }
 </script>
 

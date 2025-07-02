@@ -10,6 +10,7 @@
           <MovieCard :model="movie" />
         </li>
       </ul>
+      <SearchPagination />
     </div>
   </div>
 </template>
@@ -19,6 +20,7 @@
 import { computed } from 'vue';
 import { useStore } from '../stores/store'
 import MovieCard from './MovieCard.vue';
+import SearchPagination from './SearchPagination.vue';
 
 const store = useStore();
 let totalResults = computed(() => store.movieResult.totalResults);

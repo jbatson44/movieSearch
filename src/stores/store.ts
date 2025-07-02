@@ -3,18 +3,20 @@ import { defineStore } from 'pinia'
 import { MovieSearchResult } from '@/models/searchResult'
 import { MovieViewModel } from '@/models/movieViewModel'
 import { ResultType } from '@/enums/resultTypeEnum'
+import { SearchOptions } from '@/models/searchOptions'
 
 export const useStore = defineStore('store', () => {
   let movieResult = ref(new MovieSearchResult([], "", ""));
+  let searchOptions = ref(new SearchOptions("", ResultType.All))
 
-  function search(searchQuery: string, type: ResultType, year: string) {
-    let url = buildUrl(searchQuery, type, year);
+  function search() {
+    let url = buildUrl(searchOptions.value.Query, searchOptions.value.Type, searchOptions.value.Year, searchOptions.value.Page);
     fetchData(url);
   }
 
-  function buildUrl(searchQuery: string, type: ResultType, year: string) {
+  function buildUrl(searchQuery: string, type: ResultType, year: string, page: string) {
     let apikey = "3f66eca5";
-    let url = `https://www.omdbapi.com/?s=${searchQuery}&apikey=${apikey}`;
+    let url = `https://www.omdbapi.com/?s=${searchQuery}&apikey=${apikey}&page=${page}`;
     if (type !== ResultType.All) {
       url += `&type=${type}`;
     }
@@ -53,5 +55,5 @@ export const useStore = defineStore('store', () => {
   }
   
 
-  return { search, movieResult }
+  return { search, movieResult, searchOptions }
 })
