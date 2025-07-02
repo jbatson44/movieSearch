@@ -1,18 +1,16 @@
 # movieSearch
 
-This template should help get you started developing with Vue 3 in Vite.
+Vue app to allow searching and displaying results from Open Movie Database
+If I had more time I would:
+* Validate the user text input to prevent bad input (code injection etc.)
+* store the api key in a safer spot
+* fix the pagination so that it wouldn't show every page. Instead have the first and last pages as well as a max of 2 page above and below the current page
+* store recent searches to allow the user to quickly use them again
+* improve the overall styling
 
 ## Recommended IDE Setup
 
 [VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
 
 ## Project Setup
 
@@ -20,14 +18,10 @@ See [Vite Configuration Reference](https://vite.dev/config/).
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+### Compile and Run
 
 ```sh
 npm run dev
 ```
-
-### Type-Check, Compile and Minify for Production
-
-```sh
-npm run build
-```
+Then open a browser at the Local address:
+![image](https://github.com/user-attachments/assets/6435915b-7656-4009-97ab-593a43d7d9e2)
