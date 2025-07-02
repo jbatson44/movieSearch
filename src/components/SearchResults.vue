@@ -1,7 +1,7 @@
 <template>
   <div class="search-results">
     <h3>Total Result: {{ totalResults }}</h3>
-    <ul>
+    <ul class="search-results--list">
       <li v-for="movie in results" :key="movie.ImdbID">
         <MovieCard :model="movie" />
       </li>
@@ -20,27 +20,15 @@ let totalResults = computed(() => store.movieResult.totalResults);
 let results = computed(() => store.movieResult.search);
 </script>
 
-<style scoped>
-h1 {
-  font-weight: 500;
-  font-size: 2.6rem;
-  position: relative;
-  top: -10px;
-}
-
+<style scoped lang="scss">
 h3 {
   font-size: 1.2rem;
 }
 
-.greetings h1,
-.greetings h3 {
-  text-align: center;
-}
-
-@media (min-width: 1024px) {
-  .greetings h1,
-  .greetings h3 {
-    text-align: left;
+.search-results {
+  &--list {
+    list-style-type: none;
   }
 }
+
 </style>

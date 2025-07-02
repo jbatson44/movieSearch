@@ -1,9 +1,12 @@
 <template>
-  <div class="search-bar">
-    <input id="search" type="text" v-model="searchString" />
-    <button :onclick="submitSearch">Search</button>
+  <div class="search-bar-container">
+    <div class="search-bar">
+      <label for="search">Search movies/series by name: </label>
+      <input id="search" type="text" v-model="searchString" @keyup.enter="submitSearch"/>
+      <button :onclick="submitSearch">Search</button>
+    </div>
   </div>
-  <div v-html="searchString"></div>
+  <hr>
 </template>
 
 <script setup lang="ts">
@@ -23,27 +26,11 @@ function submitSearch()
 </script>
 
 
-<style scoped>
-h1 {
-  font-weight: 500;
-  font-size: 2.6rem;
-  position: relative;
-  top: -10px;
+<style scoped lang="scss">
+.search-bar-container {
+  display: flex;
 }
-
-h3 {
-  font-size: 1.2rem;
-}
-
-.greetings h1,
-.greetings h3 {
-  text-align: center;
-}
-
-@media (min-width: 1024px) {
-  .greetings h1,
-  .greetings h3 {
-    text-align: left;
-  }
+.search-bar {
+  margin: auto;
 }
 </style>
