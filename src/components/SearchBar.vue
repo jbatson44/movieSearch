@@ -15,9 +15,10 @@ defineProps<{
   msg: string
 }>()
 let searchString = ref("");
+
 function submitSearch()
 {
-  store.search()
+  store.search(searchString.value);
 }
 </script>
 

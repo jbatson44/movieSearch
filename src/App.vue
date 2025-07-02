@@ -1,13 +1,14 @@
 <script setup lang="ts">
 import { RouterLink, RouterView } from 'vue-router'
 import SearchBar from './components/SearchBar.vue';
+import SearchResults from './components/SearchResults.vue';
 </script>
 
 <template>
   <header>
     <div class="wrapper">
       <SearchBar msg="You did it!" />
-
+      <SearchResults/>
       <!-- <nav>
         <RouterLink to="/">Home</RouterLink>
         <RouterLink to="/about">About</RouterLink>
