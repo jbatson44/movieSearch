@@ -8,7 +8,7 @@
       <div class="movie-card--details">
         <p>Year: {{ model.Year }}</p>
         <p>Type: {{ model.Type }}</p>
-        <a :href="imdbLink(model.ImdbID)">IMDB Link</a>
+        <a :href="imdbLink(model.ImdbID)" target="_blank">IMDB Link</a>
       </div>
     </div>
   </div>
