@@ -13,8 +13,6 @@ let totalResults = computed(() => Number(store.movieResult.totalResults));
 let totalPages = computed(() => (Math.ceil(totalResults.value / 10)));
 function searchByPagination(page: Number) 
 {
-  console.log("totalResults " + totalResults.value);
-  console.log("totalPages " + totalPages.value);
   store.searchOptions.Page = page.toString();
   store.search();
 }

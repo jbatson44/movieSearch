@@ -45,9 +45,6 @@ export const useStore = defineStore('store', () => {
           ), data.Response,
           data.totalResults
         );
-        console.log(data); // do something with the data
-        console.log(movieResult.value.totalResults);
-        console.log(movieResult.value);
       }
     } catch (error) {
       console.error('Fetch error:', error);
