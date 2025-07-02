@@ -2,18 +2,23 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { MovieSearchResult } from '@/models/searchResult'
 import { MovieViewModel } from '@/models/movieViewModel'
+import { ResultType } from '@/enums/resultTypeEnum'
 
 export const useStore = defineStore('store', () => {
   let movieResult = ref(new MovieSearchResult([], "", ""));
 
-  function search(searchQuery: string) {
-    let url = buildUrl(searchQuery);
+  function search(searchQuery: string, type: ResultType) {
+    let url = buildUrl(searchQuery, type);
     fetchData(url);
   }
 
-  function buildUrl(searchQuery: string) {
+  function buildUrl(searchQuery: string, type: ResultType) {
     let apikey = "3f66eca5";
-    return `https://www.omdbapi.com/?s=${searchQuery}&apikey=${apikey}`;
+    let url = `https://www.omdbapi.com/?s=${searchQuery}&apikey=${apikey}`;
+    if (type !== ResultType.All) {
+      url += `&type=${type}`;
+    }
+    return url;
   }
 
   async function fetchData(url: string): Promise<void> {
@@ -25,15 +30,20 @@ export const useStore = defineStore('store', () => {
       }
 
       const data = await response.json();
-      movieResult.value = new MovieSearchResult(
-        data.Search.map((m: any) =>
-          new MovieViewModel(m.Title, m.Year, m.imdbID, m.Poster, m.Type)
-        ), data.Response,
-        data.totalResults
-      );
-      console.log(data); // do something with the data
-      console.log(movieResult.value.totalResults);
-      console.log(movieResult.value);
+      if (data.Response === "False") {
+        movieResult.value = new MovieSearchResult([], data.Response, "0");
+      }
+      else {
+        movieResult.value = new MovieSearchResult(
+          data.Search.map((m: any) =>
+            new MovieViewModel(m.Title, m.Year, m.imdbID, m.Poster, m.Type)
+          ), data.Response,
+          data.totalResults
+        );
+        console.log(data); // do something with the data
+        console.log(movieResult.value.totalResults);
+        console.log(movieResult.value);
+      }
     } catch (error) {
       console.error('Fetch error:', error);
     }
