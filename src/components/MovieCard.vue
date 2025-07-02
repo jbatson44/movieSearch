@@ -1,10 +1,3 @@
-<script setup lang="ts">
-import { MovieViewModel } from '@/models/movieViewModel';
-defineProps<{
-  model: MovieViewModel
-}>()
-</script>
-
 <template>
   <div class="movie-card">
     <div class="movie-card--left">
@@ -15,16 +8,28 @@ defineProps<{
       <div class="movie-card--details">
         <p>Year: {{ model.Year }}</p>
         <p>Type: {{ model.Type }}</p>
-        <p>IMDB ID: {{ model.ImdbID }}</p>
+        <a :href="imdbLink(model.ImdbID)">IMDB Link</a>
       </div>
     </div>
   </div>
 </template>
+
+<script setup lang="ts">
+import { MovieViewModel } from '@/models/movieViewModel';
+defineProps<{
+  model: MovieViewModel
+}>()
+function imdbLink(imdbId: string)
+{
+  return `https://www.imdb.com/title/${imdbId}/`;
+}
+</script>
 
 <style scoped lang="scss">
 .movie-card {
   margin: 20px;
   display: grid;
   grid-template-columns: 30% 70%;
+  border: white 1px solid;
 }
 </style>
